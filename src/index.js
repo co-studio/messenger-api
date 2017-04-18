@@ -28,7 +28,8 @@ class Api {
         access_token: this.ACCESS_TOKEN,
         fields: 'first_name,last_name,profile_pic,locale,timezone,gender,is_payment_enabled'
       },
-      method: 'GET'
+      method: 'GET',
+      json: true
     })
   }
 }
