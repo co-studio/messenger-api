@@ -32,6 +32,42 @@ class Api {
       json: true
     })
   }
+
+  sendReadReceipt = async (id) => {
+    return await request({
+      url: `${this.BASE_URL}/me/messages`,
+      qs: { access_token: this.ACCESS_TOKEN },
+      method: 'POST',
+      json: {
+        recipient: { id },
+        sender_action: 'mark_seen'
+      }
+    })
+  }
+
+  sendTypingOn = async (id) => {
+    return await request({
+      url: `${this.BASE_URL}/me/messages`,
+      qs: { access_token: this.ACCESS_TOKEN },
+      method: 'POST',
+      json: {
+        recipient: { id },
+        sender_action: 'typing_on'
+      }
+    })
+  }
+
+  sendTypingOff = async (id) => {
+    return await request({
+      url: `${this.BASE_URL}/me/messages`,
+      qs: { access_token: this.ACCESS_TOKEN },
+      method: 'POST',
+      json: {
+        recipient: { id },
+        sender_action: 'typing_off'
+      }
+    })
+  }
 }
 
 export default Api
