@@ -68,6 +68,18 @@ class Api {
       }
     })
   }
+
+  /**
+   * @param Array[String] domains
+   */
+  whitelistDomains = async (domains) => {
+    return await request({
+      url: `${this.BASE_URL}/me/messenger_profile`,
+      qs: { access_token: this.ACCESS_TOKEN },
+      method: 'POST',
+      json: { whitelisted_domains: domains }
+    })
+  }
 }
 
 export default Api
