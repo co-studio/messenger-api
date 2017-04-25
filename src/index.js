@@ -4,7 +4,7 @@ const debug = require('debug')('messenger-api')
 class Api {
   constructor(ACCESS_TOKEN) {
     this.ACCESS_TOKEN = ACCESS_TOKEN
-    this.BASE_URL = 'https://graph.facebook.com/v2.8/'
+    this.BASE_URL = 'https://graph.facebook.com/v2.8'
   }
 
   subscribe = async () => {
@@ -19,6 +19,32 @@ class Api {
     else {
       debug(`Successfully subscribed to page: ${res}`)
     }
+  }
+
+  setGetStartedButton = async (payload) => {
+    return await request({
+      url: `${this.BASE_URL}/me/messenger_profile`,
+      qs: { access_token: this.ACCESS_TOKEN },
+      method: 'POST',
+      json: {
+        get_started: { payload }
+      }
+    })
+  }
+
+  setPersistentMenu = async (call_to_actions, locale = 'default', composer_input_disabled = false) => {
+    return await request({
+      url: `${this.BASE_URL}/me/messenger_profile`,
+      qs: { access_token: this.ACCESS_TOKEN },
+      method: 'POST',
+      json: {
+        persistent_menu: [{
+          locale,
+          composer_input_disabled,
+          call_to_actions
+        }]
+      }
+    })
   }
 
   getUserProfile = async (id) => {
